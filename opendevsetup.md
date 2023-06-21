@@ -48,13 +48,23 @@ Definition of Done - We have a clear definition of done documented in every user
 ## Releases
 
 
-### Eclipse Foundation Release tool
+### Latest release
+
+Details about the latest Xpanse release can be found on the official Eclipse Foundation [Xpanse release page](https://projects.eclipse.org/projects/technology.xpanse/releases/1.0.0/plan)
 
 ### Intended release cadence
 
-### Intended lifecycle and end of life policy
+The Xpanse project aims at releasing a new major release once a year: a Spring release and a Fall release.
+A major release can introduce new major functionalities and change APIs, thus obsoleting deprecated ones.
 
-### Issues and bugs handling, SLA and bugs triage
+A minor release is meant for updates such as bug fixes and CVEs fixes and is not meant to break API compatibility.
+
+### Intended lifecycle and end-of-life policy
+
+The latest release is supported until a new major becomes available and for no less than 2 years even if a new major has become available.
+This would allow developers and users enough time to plan for an upgrade.
+
+### Issues and bugs handling, SLA, and bugs triage
 
 ## Compliance
 
@@ -71,9 +81,17 @@ We implement different levels of automated tests in our code base.
 
 ### Release criteria
 
+Typical Xpanse release criteria that are gating a release of an upgrade or an update are:
+- No critical bugs, CVEs, nor IP compliance issues are present
+- 100% test coverage of all relevant roadmap features
+- At least 95% pass rate
+- A Software Bill of Material and test artifacts that accompany a release
+
 ## Community interaction
 
 ### Meeting tool
+
+The Xpanse project preferably leverages [Jitsi](https://jitsi.org)  or, alternatively, Google Meet.
 
 ### Public chat channel
 
