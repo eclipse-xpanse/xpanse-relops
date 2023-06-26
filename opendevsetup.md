@@ -66,6 +66,8 @@ This would allow developers and users enough time to plan for an upgrade.
 
 ### Issues and bugs handling, SLA, and bugs triage
 
+Bug handling process for Xpanse project is documented [here](https://eclipse-xpanse.github.io/xpanse-website/docs/Contribute/bug-handling-process).
+
 ## Compliance
 
 ### Cybersec
