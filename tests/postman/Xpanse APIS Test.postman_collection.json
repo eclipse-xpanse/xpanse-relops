@@ -1,0 +1,904 @@
+{
+	"info": {
+		"_postman_id": "bfd8d3d1-665b-49fe-ad01-a07febd2110b",
+		"name": "Xpanse APIS Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AdminServicesApi",
+			"item": [
+				{
+					"name": "healthCheck",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/xpanse/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CredentialManageApi",
+			"item": [
+				{
+					"name": "getCredentialTypesByCsp",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/xpanse/auth/csp/huawei/credential/types",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"auth",
+								"csp",
+								"huawei",
+								"credential",
+								"types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCredentialCapabilitiesByCsp",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/xpanse/auth/csp/huawei/credential/capabilities",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"auth",
+								"csp",
+								"huawei",
+								"credential",
+								"capabilities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCredentialsByUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/xpanse/auth/user/credentials?userName=admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"auth",
+								"user",
+								"credentials"
+							],
+							"query": [
+								{
+									"key": "userName",
+									"value": "admin"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCredentials",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/xpanse/auth/csp/flexibleengine/credentials?type=variables&userName=admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"auth",
+								"csp",
+								"flexibleengine",
+								"credentials"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "variables"
+								},
+								{
+									"key": "userName",
+									"value": "admin"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCredentialOpenApi",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/xpanse/auth/csp/huawei/openapi/variables",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"auth",
+								"csp",
+								"huawei",
+								"openapi",
+								"variables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addCredential-huawei",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"csp\": \"huawei\",\r\n    \"xpanseUser\": \"admin\",\r\n    \"name\": \"AK_SK\",\r\n    \"description\": \"Using The access key and security key authentication.\",\r\n    \"type\": \"variables\",\r\n    \"timeToLive\": 3600,\r\n    \"variables\": [\r\n        {\r\n            \"name\": \"HW_ACCESS_KEY\",\r\n            \"description\": \"The access key.\",\r\n            \"value\": \"1111111111111111111\",\r\n            \"isMandatory\": false,\r\n            \"isSensitive\": false\r\n        },\r\n        {\r\n            \"name\": \"HW_SECRET_KEY\",\r\n            \"description\": \"The security key.\",\r\n            \"value\": \"111111111111111111\",\r\n            \"isMandatory\": false,\r\n            \"isSensitive\": false\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/xpanse/auth/csp/credential",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"auth",
+								"csp",
+								"credential"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addCredential-flexibleengine",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"csp\": \"flexibleEngine\",\r\n    \"xpanseUser\": \"admin\",\r\n    \"name\": \"AK_SK\",\r\n    \"description\": \"The access key and security key.\",\r\n    \"type\": \"variables\",\r\n    \"timeToLive\": 3600,\r\n    \"variables\": [\r\n        {\r\n            \"name\": \"OS_ACCESS_KEY\",\r\n            \"description\": \"The access key.\",\r\n            \"isMandatory\": false,\r\n            \"isSensitive\": false,\r\n            \"value\": \"11111111111111111111\"\r\n        },\r\n        {\r\n            \"name\": \"OS_SECRET_KEY\",\r\n            \"description\": \"The security key.\",\r\n            \"isMandatory\": false,\r\n            \"isSensitive\": false,\r\n            \"value\": \"11111111111111111111\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/xpanse/auth/csp/credential",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"auth",
+								"csp",
+								"credential"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addCredential-openstack",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"csp\": \"openstack\",\r\n    \"xpanseUser\": \"admin\",\r\n    \"name\": \"Variables\",\r\n    \"description\": \"Authenticate at the specified URL using an account and password.\",\r\n    \"type\": \"variables\",\r\n    \"timeToLive\": 3600,\r\n    \"variables\": [\r\n        {\r\n            \"name\": \"OS_PROJECT_NAME\",\r\n            \"description\": \"The Name of the Tenant or Project to use.\",\r\n            \"isMandatory\": true,\r\n            \"isSensitive\": false,\r\n            \"value\": \"11111111111\"\r\n        },\r\n        {\r\n            \"name\": \"OS_USERNAME\",\r\n            \"description\": \"The Username to login with.\",\r\n            \"isMandatory\": true,\r\n            \"isSensitive\": false,\r\n            \"value\": \"11111111111\"\r\n        },\r\n        {\r\n            \"name\": \"OS_PASSWORD\",\r\n            \"description\": \"The Password to login with.\",\r\n            \"isMandatory\": true,\r\n            \"isSensitive\": true,\r\n            \"value\": \"11111111111\"\r\n        },\r\n        {\r\n            \"name\": \"OS_DOMAIN_NAME\",\r\n            \"description\": \"The domain of the openstack installation to be used.\",\r\n            \"isMandatory\": true,\r\n            \"isSensitive\": false,\r\n            \"value\": \"11111111111\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/xpanse/auth/csp/credential",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"auth",
+								"csp",
+								"credential"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCredential",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"csp\": \"openstack\",\r\n    \"xpanseUser\": \"admin\",\r\n    \"name\": \"Variables\",\r\n    \"description\": \"Authenticate at the specified URL using an account and password.\",\r\n    \"type\": \"variables\",\r\n    \"timeToLive\": 3600,\r\n    \"variables\": [\r\n        {\r\n            \"name\": \"OS_PROJECT_NAME\",\r\n            \"description\": \"The Name of the Tenant or Project to use.\",\r\n            \"isMandatory\": true,\r\n            \"isSensitive\": false,\r\n            \"value\": \"222222222222222222\"\r\n        },\r\n        {\r\n            \"name\": \"OS_USERNAME\",\r\n            \"description\": \"The Username to login with.\",\r\n            \"isMandatory\": true,\r\n            \"isSensitive\": false,\r\n            \"value\": \"222222222222222222\"\r\n        },\r\n        {\r\n            \"name\": \"OS_PASSWORD\",\r\n            \"description\": \"The Password to login with.\",\r\n            \"isMandatory\": true,\r\n            \"isSensitive\": true,\r\n            \"value\": \"22222222222222222\"\r\n        },\r\n        {\r\n            \"name\": \"OS_DOMAIN_NAME\",\r\n            \"description\": \"The domain of the openstack installation to be used.\",\r\n            \"isMandatory\": true,\r\n            \"isSensitive\": false,\r\n            \"value\": \"222222222222222222\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/xpanse/auth/csp/credential",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"auth",
+								"csp",
+								"credential"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCredential",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/xpanse/auth/csp/openstack/credential?type=variables&name=Variables&userName=admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"auth",
+								"csp",
+								"openstack",
+								"credential"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "variables"
+								},
+								{
+									"key": "name",
+									"value": "Variables"
+								},
+								{
+									"key": "userName",
+									"value": "admin"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MonitorApi",
+			"item": [
+				{
+					"name": "getMetricsByServiceId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/xpanse/monitor/metric/service/3ac92672-c581-4cb5-94b4-13a90672cf18",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"monitor",
+								"metric",
+								"service",
+								"3ac92672-c581-4cb5-94b4-13a90672cf18"
+							],
+							"query": [
+								{
+									"key": "monitorResourceType",
+									"value": "cpu",
+									"disabled": true
+								},
+								{
+									"key": "from",
+									"value": "1690779600000",
+									"disabled": true
+								},
+								{
+									"key": "to",
+									"value": "1690783200000",
+									"disabled": true
+								},
+								{
+									"key": "granularity",
+									"value": "1200",
+									"disabled": true
+								},
+								{
+									"key": "onlyLastKnownMetric",
+									"value": "true",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMetricsByResourceId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/xpanse/monitor/metric/resource/1627143a-a70b-4a76-a8ac-0585531a8b8c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"monitor",
+								"metric",
+								"resource",
+								"1627143a-a70b-4a76-a8ac-0585531a8b8c"
+							],
+							"query": [
+								{
+									"key": "monitorResourceType",
+									"value": "vm_network_outgoing",
+									"disabled": true
+								},
+								{
+									"key": "from",
+									"value": "1690779600000",
+									"disabled": true
+								},
+								{
+									"key": "to",
+									"value": "1690783200000",
+									"disabled": true
+								},
+								{
+									"key": "granularity",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "onlyLastKnownMetric",
+									"value": "true",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ServiceCatalogApi",
+			"item": [
+				{
+					"name": "listAvailableServices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/xpanse/services/available",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"services",
+								"available"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAvailableServicesTree",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/xpanse/services/available/category/middleware",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"services",
+								"available",
+								"category",
+								"middleware"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "availableServiceDetails",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/xpanse/services/available/20fa59e0-ab0d-420c-902c-eb5b62fe3483",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"services",
+								"available",
+								"20fa59e0-ab0d-420c-902c-eb5b62fe3483"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "openApi",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/xpanse/services/available/d50bcd75-c148-4e9f-bf54-91d6784cd4b9/openapi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"services",
+								"available",
+								"d50bcd75-c148-4e9f-bf54-91d6784cd4b9",
+								"openapi"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ServiceDeployerApi",
+			"item": [
+				{
+					"name": "getDeployedServiceDetailsById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/xpanse/services/deployed/e86d012a-4092-46c1-a091-15f24a193dd2/details/default",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"services",
+								"deployed",
+								"e86d012a-4092-46c1-a091-15f24a193dd2",
+								"details",
+								"default"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listDeployedServices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/xpanse/services/deployed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"services",
+								"deployed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDeployedServicesByUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/xpanse/services/deployed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"services",
+								"deployed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deploy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"serviceName\": \"Kafka-cluster\",\r\n  \"version\": \"v3.3.2\",\r\n  \"csp\": \"huawei\",\r\n  \"category\": \"middleware\",\r\n  \"flavor\": \"1-zookeeper-with-3-worker-nodes-normal\",\r\n  \"region\": \"cn-southwest-2\",\r\n  \"userName\": \"default\",\r\n  \"customerServiceName\": \"default-kafka\",\r\n  \"serviceRequestProperties\": {}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/xpanse/services/deploy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"services",
+								"deploy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destroy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/xpanse/services/destroy/0dec3351-f256-4bfd-a07f-1369c1196f34",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"services",
+								"destroy",
+								"0dec3351-f256-4bfd-a07f-1369c1196f34"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ServiceRegisterApi",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yaml",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "# The version of the OCL\r\nversion: 2.0\r\n# The category of the service.\r\ncategory: middleware\r\n# The Service provided by the ISV, the name will be shown on the console as a service.\r\nname: Kafka-cluster\r\n# The version of the service, if the end-user want to select the version when they want to deploy the service.\r\nserviceVersion: v3.3.2\r\n# For the users may have more than one service, the @namespace can be used to separate the clusters.\r\ndescription: This is an ehanced Kafka cluster services by ISV-A.\r\nnamespace: ISV-A\r\n# Icon for the service.\r\nicon: |\r\n  data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAACRAQMAAAAPc4+9AAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAZQTFRF+/v7Hh8gVD0A0wAAAcVJREFUeJzNlc1twzAMhSX44KNH0CgaTd6gK3kUd4McDVTwq/hjiUyaIkV7qNA2/QCFIh+ppxB+svLNEqqBGTC0ANugBOwmCGDCFOAwIWGDOoqoODtN2BdL6wxD9NMTO9tXPa1PqL5M30W5p8lm5vNcF0t7ahSrVguqNqmMokRW4YQucVjBCBWH1Z2g3WDlW2skoYU+2x8JOtGedBF3k2iXMO0j16iUiI6gxzPdQhnU/s2G9pCO57QY2r6hvjPbKJHq7DRTRXT60avtuTRdbrFJI3mSZhNOqYjVbd99YyK1QKWzEqSWrE0k07U60uPaelflMzaaeu1KBuurHSsn572I1KWy2joX5ZBfWbS/VEt50H5P6aL4JxTuyJ/+QCNPX4PWF3Q8Xe1eF9FsLdD2VaOnaP2hWvs+zI58/7i3vH3nRFtDZpyTUNaZkON5XnBNsp8lrmDMrpvBr+b6pUl+4XbkQdndqnzYGzfuJm1JmIWimIbe6dndd/bk7gVce/cJdo3uIeLJl7+I2xTnPek67mjtDeppE7b03Ov+kSfDe3JweW53njxeGfXkaz28VeYd86+af/H8a7hgJKaebILaFzakLfxyfQLTxVB6K1K9KQAAAABJRU5ErkJggg==\r\n# Reserved for CSP, aws,azure,ali,huawei and ...\r\ncloudServiceProvider:\r\n  name: huawei\r\n  regions:\r\n    - name: cn-southwest-2\r\n      area: Asia China\r\n    - name: cn-north-4\r\n      area: Asia China\r\nbilling:\r\n  # The business model(`flat`, `exponential`, ...)\r\n  model: flat\r\n  # The rental period (`daily`, `weekly`, `monthly`, `yearly`)\r\n  period: monthly\r\n  # The billing currency (`euro`, `usd`, ...)\r\n  currency: euro\r\n# The flavor of the service, the @category/@name/@version/@flavor can locate the specific service to be deployed.\r\nflavors:\r\n  - name: 1-zookeeper-with-3-worker-nodes-normal\r\n    # The fixed price during the period (the price applied one shot whatever is the service use)\r\n    fixedPrice: 40\r\n    # Properties for the service, which can be used by the deployment.\r\n    properties:\r\n      worker_nodes_count: 3\r\n      flavor_id: c7.large.4\r\n  - name: 1-zookeeper-with-3-worker-nodes-performance\r\n    # The fixed price during the period (the price applied one shot whatever is the service use)\r\n    fixedPrice: 60\r\n    # Properties for the service, which can be used by the deployment.\r\n    properties:\r\n      worker_nodes_count: 3\r\n      flavor_id: c7.xlarge.4\r\n  - name: 1-zookeeper-with-5-worker-nodes-normal\r\n    # The fixed price during the period (the price applied one shot whatever is the service use)\r\n    fixedPrice: 60\r\n    # Properties for the service, which can be used by the deployment.\r\n    properties:\r\n      worker_nodes_count: 5\r\n      flavor_id: c7.large.4\r\n  - name: 1-zookeeper-with-5-worker-nodes-performance\r\n    # The fixed price during the period (the price applied one shot whatever is the service use)\r\n    fixedPrice: 80\r\n    # Properties for the service, which can be used by the deployment.\r\n    properties:\r\n      worker_nodes_count: 5\r\n      flavor_id: c7.xlarge.4\r\ndeployment:\r\n  # kind, Supported values are terraform, pulumi, crossplane.\r\n  kind: terraform\r\n  # Context for deployment: the context including some kind of parameters for the deployment, such as fix_env, fix_variable, env, variable, env_env, env_variable.\r\n  # - fix_env: Values for variable of this type are defined by the managed service provider in the OCL template. Runtime will inject it to deployer as environment variables. This variable is not visible to the end user.\r\n  # - fix_variable: Values for variable of this type are defined by the managed service provider in the OCL template. Runtime will inject it to deployer as usual variables. This variable is not visible to the end user.\r\n  # - env: Value for a variable of this type can be provided by end user. If marked as mandatory then end user must provide value to this variable. If marked as optional and if end user does not provided it, then the fallback value to this variable is read by runtime (it can read from other sources, e.g., OS env variables). This variable is injected as a environment variable to the deployer.\r\n  # - variable: Value for a variable of this type can be provided by end user. . If marked as mandatory then end user must provide value to this variable. If marked as optional and if end user does not provided it, then the fallback value to this variable is read by runtime (it can read from other sources, e.g., OS env variables). This variable is injected as a regular variable to the deployer.\r\n  # - env_env: Value to this variable is read by runtime (it can read from other sources, e.g., OS env variables) and injected as a environment variable to the deployer. End user cannot see or change this variable.\r\n  # - env_variable: Value to this variable is read by runtime (it can read from other sources, e.g., OS env variables) and injected as a regular variable to the deployer. End user cannot see or change this variable.\r\n  # The parameters will be used to generate the API of the managed service.\r\n  variables:\r\n    - name: admin_passwd\r\n      description: The admin password of all nodes in the Kafka cluster. If the value is empty, will create a random password.\r\n      kind: variable\r\n      dataType: string\r\n      mandatory: false\r\n      validator: minLength=8|maxLength=16|pattern=^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$\r\n    - name: vpc_name\r\n      description: The vpc name of all nodes in the Kafka cluster. If the value is empty, will use the example value to find or create VPC.\r\n      kind: variable\r\n      dataType: string\r\n      example: \"kafka-vpc-default\"\r\n      mandatory: false\r\n    - name: subnet_name\r\n      description: The sub network name of all nodes in the Kafka cluster. If the value is empty, will use the example value to find or create subnet.\r\n      kind: variable\r\n      dataType: string\r\n      example: \"kafka-subnet-default\"\r\n      mandatory: false\r\n    - name: secgroup_name\r\n      description: The security group name of all nodes in the Kafka cluster. If the value is empty, will use the example value to find or create security group.\r\n      kind: variable\r\n      dataType: string\r\n      example: \"kafka-secgroup-default\"\r\n      mandatory: false\r\n  deployer: |\r\n    variable \"flavor_id\" {\r\n      type        = string\r\n      default     = \"c7.large.2\"\r\n      description = \"The flavor_id of all nodes in the Kafka cluster.\"\r\n    }\r\n\r\n    variable \"worker_nodes_count\" {\r\n      type        = string\r\n      default     = 3\r\n      description = \"The worker nodes count in the Kafka cluster.\"\r\n    }\r\n\r\n    variable \"admin_passwd\" {\r\n      type        = string\r\n      default     = \"\"\r\n      description = \"The root password of all nodes in the Kafka cluster.\"\r\n    }\r\n\r\n    variable \"vpc_name\" {\r\n      type        = string\r\n      default     = \"kafka-vpc-default\"\r\n      description = \"The vpc name of all nodes in the Kafka cluster.\"\r\n    }\r\n\r\n    variable \"subnet_name\" {\r\n      type        = string\r\n      default     = \"kafka-subnet-default\"\r\n      description = \"The subnet name of all nodes in the Kafka cluster.\"\r\n    }\r\n\r\n    variable \"secgroup_name\" {\r\n      type        = string\r\n      default     = \"kafka-secgroup-default\"\r\n      description = \"The security group name of all nodes in the Kafka cluster.\"\r\n    }\r\n\r\n    data \"huaweicloud_vpcs\" \"existing\" {\r\n      name = var.vpc_name\r\n    }\r\n\r\n    data \"huaweicloud_vpc_subnets\" \"existing\" {\r\n      name = var.subnet_name\r\n    }\r\n\r\n    data \"huaweicloud_networking_secgroups\" \"existing\" {\r\n      name = var.secgroup_name\r\n    }\r\n\r\n    locals {\r\n      admin_passwd = var.admin_passwd == \"\" ? random_password.password.result : var.admin_passwd\r\n      vpc_id       = length(data.huaweicloud_vpcs.existing.vpcs) > 0 ? data.huaweicloud_vpcs.existing.vpcs[0].id : huaweicloud_vpc.new[0].id\r\n      subnet_id    = length(data.huaweicloud_vpc_subnets.existing.subnets)> 0 ? data.huaweicloud_vpc_subnets.existing.subnets[0].id : huaweicloud_vpc_subnet.new[0].id\r\n      secgroup_id  = length(data.huaweicloud_networking_secgroups.existing.security_groups) > 0 ? data.huaweicloud_networking_secgroups.existing.security_groups[0].id : huaweicloud_networking_secgroup.new[0].id\r\n    }\r\n\r\n    resource \"huaweicloud_vpc\" \"new\" {\r\n      count = length(data.huaweicloud_vpcs.existing.vpcs) == 0 ? 1 : 0\r\n      name  = var.vpc_name\r\n      cidr  = \"192.168.0.0/16\"\r\n    }\r\n\r\n    resource \"huaweicloud_vpc_subnet\" \"new\" {\r\n      count      = length(data.huaweicloud_vpcs.existing.vpcs) == 0 ? 1 : 0\r\n      vpc_id     = local.vpc_id\r\n      name       = var.subnet_name\r\n      cidr       = \"192.168.10.0/24\"\r\n      gateway_ip = \"192.168.10.1\"\r\n    }\r\n\r\n    resource \"huaweicloud_networking_secgroup\" \"new\" {\r\n      count       = length(data.huaweicloud_networking_secgroups.existing.security_groups) == 0 ? 1 : 0\r\n      name        = var.secgroup_name\r\n      description = \"Kafka cluster security group\"\r\n    }\r\n\r\n    resource \"huaweicloud_networking_secgroup_rule\" \"secgroup_rule_0\" {\r\n      count             = length(data.huaweicloud_networking_secgroups.existing.security_groups) == 0 ? 1 : 0\r\n      direction         = \"ingress\"\r\n      ethertype         = \"IPv4\"\r\n      protocol          = \"tcp\"\r\n      port_range_min    = 22\r\n      port_range_max    = 22\r\n      remote_ip_prefix  = \"121.37.117.211/32\"\r\n      security_group_id = local.secgroup_id\r\n    }\r\n\r\n    resource \"huaweicloud_networking_secgroup_rule\" \"secgroup_rule_1\" {\r\n      count             = length(data.huaweicloud_networking_secgroups.existing.security_groups) == 0 ? 1 : 0\r\n      direction         = \"ingress\"\r\n      ethertype         = \"IPv4\"\r\n      protocol          = \"tcp\"\r\n      port_range_min    = 2181\r\n      port_range_max    = 2181\r\n      remote_ip_prefix  = \"121.37.117.211/32\"\r\n      security_group_id = local.secgroup_id\r\n    }\r\n\r\n    resource \"huaweicloud_networking_secgroup_rule\" \"secgroup_rule_2\" {\r\n      count             = length(data.huaweicloud_networking_secgroups.existing.security_groups) == 0 ? 1 : 0\r\n      direction         = \"ingress\"\r\n      ethertype         = \"IPv4\"\r\n      protocol          = \"tcp\"\r\n      port_range_min    = 9092\r\n      port_range_max    = 9093\r\n      remote_ip_prefix  = \"121.37.117.211/32\"\r\n      security_group_id = local.secgroup_id\r\n    }\r\n\r\n    data \"huaweicloud_availability_zones\" \"osc-az\" {}\r\n\r\n    resource \"random_id\" \"new\" {\r\n      byte_length = 4\r\n    }\r\n\r\n    resource \"random_password\" \"password\" {\r\n      length           = 12\r\n      upper            = true\r\n      lower            = true\r\n      numeric          = true\r\n      special          = true\r\n      min_special      = 1\r\n      override_special = \"#%@\"\r\n    }\r\n\r\n    resource \"huaweicloud_compute_keypair\" \"keypair\" {\r\n      name = \"keypair-kafka-${random_id.new.hex}\"\r\n    }\r\n\r\n    data \"huaweicloud_images_image\" \"image\" {\r\n      name        = \"Kafka-v3.3.2_Ubuntu-20.04\"\r\n      most_recent = true\r\n    }\r\n\r\n    resource \"huaweicloud_compute_instance\" \"zookeeper\" {\r\n      availability_zone  = data.huaweicloud_availability_zones.osc-az.names[0]\r\n      name               = \"kafka-zookeeper-${random_id.new.hex}\"\r\n      flavor_id          = var.flavor_id\r\n      security_group_ids = [ local.secgroup_id ]\r\n      image_id           = data.huaweicloud_images_image.image.id\r\n      key_pair           = huaweicloud_compute_keypair.keypair.name\r\n      network {\r\n        uuid = local.subnet_id\r\n      }\r\n      user_data = <<EOF\r\n        #!bin/bash\r\n        echo root:${local.admin_passwd} | sudo chpasswd\r\n        sudo systemctl start docker\r\n        sudo systemctl enable docker\r\n        sudo docker run -d --name zookeeper-server --privileged=true -p 2181:2181 -e ALLOW_ANONYMOUS_LOGIN=yes bitnami/zookeeper:3.8.1\r\n      EOF\r\n    }\r\n\r\n    resource \"huaweicloud_compute_instance\" \"kafka-broker\" {\r\n      count              = var.worker_nodes_count\r\n      availability_zone  = data.huaweicloud_availability_zones.osc-az.names[0]\r\n      name               = \"kafka-broker-${random_id.new.hex}-${count.index}\"\r\n      flavor_id          = var.flavor_id\r\n      security_group_ids = [ local.secgroup_id ]\r\n      image_id           = data.huaweicloud_images_image.image.id\r\n      key_pair           = huaweicloud_compute_keypair.keypair.name\r\n      network {\r\n        uuid = local.subnet_id\r\n      }\r\n      user_data = <<EOF\r\n        #!bin/bash\r\n        echo root:${local.admin_passwd} | sudo chpasswd\r\n        sudo systemctl start docker\r\n        sudo systemctl enable docker\r\n        private_ip=$(ifconfig | grep -A1 \"eth0\" | grep 'inet' | awk -F ' ' ' {print $2}'|awk ' {print $1}')\r\n        sudo docker run -d --name kafka-server --restart always -p 9092:9092 -p 9093:9093  -e KAFKA_BROKER_ID=${count.index}  -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://$private_ip:9092 -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 -e ALLOW_PLAINTEXT_LISTENER=yes -e KAFKA_CFG_ZOOKEEPER_CONNECT=${huaweicloud_compute_instance.zookeeper.access_ip_v4}:2181 bitnami/kafka:3.3.2\r\n      EOF\r\n      depends_on = [\r\n        huaweicloud_compute_instance.zookeeper\r\n      ]\r\n    }\r\n\r\n    output \"zookeeper_server\" {\r\n      value = \"${huaweicloud_compute_instance.zookeeper.access_ip_v4}:2181\"\r\n    }\r\n\r\n    output \"admin_passwd\" {\r\n      value = var.admin_passwd == \"\" ? nonsensitive(local.admin_passwd) : local.admin_passwd\r\n    }\r\n",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/xpanse/services/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"services",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yaml",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "# The version of the OCL\r\nversion: 2.02\r\n# The category of the service.\r\ncategory: middleware\r\n# The Service provided by the ISV, the name will be shown on the console as a service.\r\nname: Kafka-cluster\r\n# The version of the service, if the end-user want to select the version when they want to deploy the service.\r\nserviceVersion: v3.3.2\r\n# For the users may have more than one service, the @namespace can be used to separate the clusters.\r\ndescription: This is an ehanced Kafka cluster services by ISV-A.\r\nnamespace: ISV-A1\r\n# Icon for the service.\r\nicon: |\r\n  data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAACRAQMAAAAPc4+9AAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAZQTFRF+/v7Hh8gVD0A0wAAAcVJREFUeJzNlc1twzAMhSX44KNH0CgaTd6gK3kUd4McDVTwq/hjiUyaIkV7qNA2/QCFIh+ppxB+svLNEqqBGTC0ANugBOwmCGDCFOAwIWGDOoqoODtN2BdL6wxD9NMTO9tXPa1PqL5M30W5p8lm5vNcF0t7ahSrVguqNqmMokRW4YQucVjBCBWH1Z2g3WDlW2skoYU+2x8JOtGedBF3k2iXMO0j16iUiI6gxzPdQhnU/s2G9pCO57QY2r6hvjPbKJHq7DRTRXT60avtuTRdbrFJI3mSZhNOqYjVbd99YyK1QKWzEqSWrE0k07U60uPaelflMzaaeu1KBuurHSsn572I1KWy2joX5ZBfWbS/VEt50H5P6aL4JxTuyJ/+QCNPX4PWF3Q8Xe1eF9FsLdD2VaOnaP2hWvs+zI58/7i3vH3nRFtDZpyTUNaZkON5XnBNsp8lrmDMrpvBr+b6pUl+4XbkQdndqnzYGzfuJm1JmIWimIbe6dndd/bk7gVce/cJdo3uIeLJl7+I2xTnPek67mjtDeppE7b03Ov+kSfDe3JweW53njxeGfXkaz28VeYd86+af/H8a7hgJKaebILaFzakLfxyfQLTxVB6K1K9KQAAAABJRU5ErkJggg==\r\n# Reserved for CSP, aws,azure,ali,huawei and ...\r\ncloudServiceProvider:\r\n  name: huawei\r\n  regions:\r\n    - name: cn-southwest-2\r\n      area: Asia China\r\n    - name: cn-north-4\r\n      area: Asia China\r\nbilling:\r\n  # The business model(`flat`, `exponential`, ...)\r\n  model: flat\r\n  # The rental period (`daily`, `weekly`, `monthly`, `yearly`)\r\n  period: monthly\r\n  # The billing currency (`euro`, `usd`, ...)\r\n  currency: euro\r\n# The flavor of the service, the @category/@name/@version/@flavor can locate the specific service to be deployed.\r\nflavors:\r\n  - name: 1-zookeeper-with-3-worker-nodes-normal\r\n    # The fixed price during the period (the price applied one shot whatever is the service use)\r\n    fixedPrice: 40\r\n    # Properties for the service, which can be used by the deployment.\r\n    properties:\r\n      worker_nodes_count: 3\r\n      flavor_id: c7.large.4\r\n  - name: 1-zookeeper-with-3-worker-nodes-performance\r\n    # The fixed price during the period (the price applied one shot whatever is the service use)\r\n    fixedPrice: 60\r\n    # Properties for the service, which can be used by the deployment.\r\n    properties:\r\n      worker_nodes_count: 3\r\n      flavor_id: c7.xlarge.4\r\n  - name: 1-zookeeper-with-5-worker-nodes-normal\r\n    # The fixed price during the period (the price applied one shot whatever is the service use)\r\n    fixedPrice: 60\r\n    # Properties for the service, which can be used by the deployment.\r\n    properties:\r\n      worker_nodes_count: 5\r\n      flavor_id: c7.large.4\r\n  - name: 1-zookeeper-with-5-worker-nodes-performance\r\n    # The fixed price during the period (the price applied one shot whatever is the service use)\r\n    fixedPrice: 80\r\n    # Properties for the service, which can be used by the deployment.\r\n    properties:\r\n      worker_nodes_count: 5\r\n      flavor_id: c7.xlarge.4\r\ndeployment:\r\n  # kind, Supported values are terraform, pulumi, crossplane.\r\n  kind: terraform\r\n  # Context for deployment: the context including some kind of parameters for the deployment, such as fix_env, fix_variable, env, variable, env_env, env_variable.\r\n  # - fix_env: Values for variable of this type are defined by the managed service provider in the OCL template. Runtime will inject it to deployer as environment variables. This variable is not visible to the end user.\r\n  # - fix_variable: Values for variable of this type are defined by the managed service provider in the OCL template. Runtime will inject it to deployer as usual variables. This variable is not visible to the end user.\r\n  # - env: Value for a variable of this type can be provided by end user. If marked as mandatory then end user must provide value to this variable. If marked as optional and if end user does not provided it, then the fallback value to this variable is read by runtime (it can read from other sources, e.g., OS env variables). This variable is injected as a environment variable to the deployer.\r\n  # - variable: Value for a variable of this type can be provided by end user. . If marked as mandatory then end user must provide value to this variable. If marked as optional and if end user does not provided it, then the fallback value to this variable is read by runtime (it can read from other sources, e.g., OS env variables). This variable is injected as a regular variable to the deployer.\r\n  # - env_env: Value to this variable is read by runtime (it can read from other sources, e.g., OS env variables) and injected as a environment variable to the deployer. End user cannot see or change this variable.\r\n  # - env_variable: Value to this variable is read by runtime (it can read from other sources, e.g., OS env variables) and injected as a regular variable to the deployer. End user cannot see or change this variable.\r\n  # The parameters will be used to generate the API of the managed service.\r\n  variables:\r\n    - name: admin_passwd\r\n      description: The admin password of all nodes in the Kafka cluster. If the value is empty, will create a random password.\r\n      kind: variable\r\n      dataType: string\r\n      mandatory: false\r\n      validator: minLength=8|maxLength=16|pattern=^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$\r\n    - name: vpc_name\r\n      description: The vpc name of all nodes in the Kafka cluster. If the value is empty, will use the example value to find or create VPC.\r\n      kind: variable\r\n      dataType: string\r\n      example: \"kafka-vpc-default\"\r\n      mandatory: false\r\n    - name: subnet_name\r\n      description: The sub network name of all nodes in the Kafka cluster. If the value is empty, will use the example value to find or create subnet.\r\n      kind: variable\r\n      dataType: string\r\n      example: \"kafka-subnet-default\"\r\n      mandatory: false\r\n    - name: secgroup_name\r\n      description: The security group name of all nodes in the Kafka cluster. If the value is empty, will use the example value to find or create security group.\r\n      kind: variable\r\n      dataType: string\r\n      example: \"kafka-secgroup-default\"\r\n      mandatory: false\r\n  deployer: |\r\n    variable \"flavor_id\" {\r\n      type        = string\r\n      default     = \"c7.large.2\"\r\n      description = \"The flavor_id of all nodes in the Kafka cluster.\"\r\n    }\r\n\r\n    variable \"worker_nodes_count\" {\r\n      type        = string\r\n      default     = 3\r\n      description = \"The worker nodes count in the Kafka cluster.\"\r\n    }\r\n\r\n    variable \"admin_passwd\" {\r\n      type        = string\r\n      default     = \"\"\r\n      description = \"The root password of all nodes in the Kafka cluster.\"\r\n    }\r\n\r\n    variable \"vpc_name\" {\r\n      type        = string\r\n      default     = \"kafka-vpc-default\"\r\n      description = \"The vpc name of all nodes in the Kafka cluster.\"\r\n    }\r\n\r\n    variable \"subnet_name\" {\r\n      type        = string\r\n      default     = \"kafka-subnet-default\"\r\n      description = \"The subnet name of all nodes in the Kafka cluster.\"\r\n    }\r\n\r\n    variable \"secgroup_name\" {\r\n      type        = string\r\n      default     = \"kafka-secgroup-default\"\r\n      description = \"The security group name of all nodes in the Kafka cluster.\"\r\n    }\r\n\r\n    data \"huaweicloud_vpcs\" \"existing\" {\r\n      name = var.vpc_name\r\n    }\r\n\r\n    data \"huaweicloud_vpc_subnets\" \"existing\" {\r\n      name = var.subnet_name\r\n    }\r\n\r\n    data \"huaweicloud_networking_secgroups\" \"existing\" {\r\n      name = var.secgroup_name\r\n    }\r\n\r\n    locals {\r\n      admin_passwd = var.admin_passwd == \"\" ? random_password.password.result : var.admin_passwd\r\n      vpc_id       = length(data.huaweicloud_vpcs.existing.vpcs) > 0 ? data.huaweicloud_vpcs.existing.vpcs[0].id : huaweicloud_vpc.new[0].id\r\n      subnet_id    = length(data.huaweicloud_vpc_subnets.existing.subnets)> 0 ? data.huaweicloud_vpc_subnets.existing.subnets[0].id : huaweicloud_vpc_subnet.new[0].id\r\n      secgroup_id  = length(data.huaweicloud_networking_secgroups.existing.security_groups) > 0 ? data.huaweicloud_networking_secgroups.existing.security_groups[0].id : huaweicloud_networking_secgroup.new[0].id\r\n    }\r\n\r\n    resource \"huaweicloud_vpc\" \"new\" {\r\n      count = length(data.huaweicloud_vpcs.existing.vpcs) == 0 ? 1 : 0\r\n      name  = var.vpc_name\r\n      cidr  = \"192.168.0.0/16\"\r\n    }\r\n\r\n    resource \"huaweicloud_vpc_subnet\" \"new\" {\r\n      count      = length(data.huaweicloud_vpcs.existing.vpcs) == 0 ? 1 : 0\r\n      vpc_id     = local.vpc_id\r\n      name       = var.subnet_name\r\n      cidr       = \"192.168.10.0/24\"\r\n      gateway_ip = \"192.168.10.1\"\r\n    }\r\n\r\n    resource \"huaweicloud_networking_secgroup\" \"new\" {\r\n      count       = length(data.huaweicloud_networking_secgroups.existing.security_groups) == 0 ? 1 : 0\r\n      name        = var.secgroup_name\r\n      description = \"Kafka cluster security group\"\r\n    }\r\n\r\n    resource \"huaweicloud_networking_secgroup_rule\" \"secgroup_rule_0\" {\r\n      count             = length(data.huaweicloud_networking_secgroups.existing.security_groups) == 0 ? 1 : 0\r\n      direction         = \"ingress\"\r\n      ethertype         = \"IPv4\"\r\n      protocol          = \"tcp\"\r\n      port_range_min    = 22\r\n      port_range_max    = 22\r\n      remote_ip_prefix  = \"121.37.117.211/32\"\r\n      security_group_id = local.secgroup_id\r\n    }\r\n\r\n    resource \"huaweicloud_networking_secgroup_rule\" \"secgroup_rule_1\" {\r\n      count             = length(data.huaweicloud_networking_secgroups.existing.security_groups) == 0 ? 1 : 0\r\n      direction         = \"ingress\"\r\n      ethertype         = \"IPv4\"\r\n      protocol          = \"tcp\"\r\n      port_range_min    = 2181\r\n      port_range_max    = 2181\r\n      remote_ip_prefix  = \"121.37.117.211/32\"\r\n      security_group_id = local.secgroup_id\r\n    }\r\n\r\n    resource \"huaweicloud_networking_secgroup_rule\" \"secgroup_rule_2\" {\r\n      count             = length(data.huaweicloud_networking_secgroups.existing.security_groups) == 0 ? 1 : 0\r\n      direction         = \"ingress\"\r\n      ethertype         = \"IPv4\"\r\n      protocol          = \"tcp\"\r\n      port_range_min    = 9092\r\n      port_range_max    = 9093\r\n      remote_ip_prefix  = \"121.37.117.211/32\"\r\n      security_group_id = local.secgroup_id\r\n    }\r\n\r\n    data \"huaweicloud_availability_zones\" \"osc-az\" {}\r\n\r\n    resource \"random_id\" \"new\" {\r\n      byte_length = 4\r\n    }\r\n\r\n    resource \"random_password\" \"password\" {\r\n      length           = 12\r\n      upper            = true\r\n      lower            = true\r\n      numeric          = true\r\n      special          = true\r\n      min_special      = 1\r\n      override_special = \"#%@\"\r\n    }\r\n\r\n    resource \"huaweicloud_compute_keypair\" \"keypair\" {\r\n      name = \"keypair-kafka-${random_id.new.hex}\"\r\n    }\r\n\r\n    data \"huaweicloud_images_image\" \"image\" {\r\n      name        = \"Kafka-v3.3.2_Ubuntu-20.04\"\r\n      most_recent = true\r\n    }\r\n\r\n    resource \"huaweicloud_compute_instance\" \"zookeeper\" {\r\n      availability_zone  = data.huaweicloud_availability_zones.osc-az.names[0]\r\n      name               = \"kafka-zookeeper-${random_id.new.hex}\"\r\n      flavor_id          = var.flavor_id\r\n      security_group_ids = [ local.secgroup_id ]\r\n      image_id           = data.huaweicloud_images_image.image.id\r\n      key_pair           = huaweicloud_compute_keypair.keypair.name\r\n      network {\r\n        uuid = local.subnet_id\r\n      }\r\n      user_data = <<EOF\r\n        #!bin/bash\r\n        echo root:${local.admin_passwd} | sudo chpasswd\r\n        sudo systemctl start docker\r\n        sudo systemctl enable docker\r\n        sudo docker run -d --name zookeeper-server --privileged=true -p 2181:2181 -e ALLOW_ANONYMOUS_LOGIN=yes bitnami/zookeeper:3.8.1\r\n      EOF\r\n    }\r\n\r\n    resource \"huaweicloud_compute_instance\" \"kafka-broker\" {\r\n      count              = var.worker_nodes_count\r\n      availability_zone  = data.huaweicloud_availability_zones.osc-az.names[0]\r\n      name               = \"kafka-broker-${random_id.new.hex}-${count.index}\"\r\n      flavor_id          = var.flavor_id\r\n      security_group_ids = [ local.secgroup_id ]\r\n      image_id           = data.huaweicloud_images_image.image.id\r\n      key_pair           = huaweicloud_compute_keypair.keypair.name\r\n      network {\r\n        uuid = local.subnet_id\r\n      }\r\n      user_data = <<EOF\r\n        #!bin/bash\r\n        echo root:${local.admin_passwd} | sudo chpasswd\r\n        sudo systemctl start docker\r\n        sudo systemctl enable docker\r\n        private_ip=$(ifconfig | grep -A1 \"eth0\" | grep 'inet' | awk -F ' ' ' {print $2}'|awk ' {print $1}')\r\n        sudo docker run -d --name kafka-server --restart always -p 9092:9092 -p 9093:9093  -e KAFKA_BROKER_ID=${count.index}  -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://$private_ip:9092 -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 -e ALLOW_PLAINTEXT_LISTENER=yes -e KAFKA_CFG_ZOOKEEPER_CONNECT=${huaweicloud_compute_instance.zookeeper.access_ip_v4}:2181 bitnami/kafka:3.3.2\r\n      EOF\r\n      depends_on = [\r\n        huaweicloud_compute_instance.zookeeper\r\n      ]\r\n    }\r\n\r\n    output \"zookeeper_server\" {\r\n      value = \"${huaweicloud_compute_instance.zookeeper.access_ip_v4}:2181\"\r\n    }\r\n\r\n    output \"admin_passwd\" {\r\n      value = var.admin_passwd == \"\" ? nonsensitive(local.admin_passwd) : local.admin_passwd\r\n    }\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/xpanse/services/register/d50bcd75-c148-4e9f-bf54-91d6784cd4b9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"services",
+								"register",
+								"d50bcd75-c148-4e9f-bf54-91d6784cd4b9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fetch",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/xpanse/services/register/file?oclLocation=file:C:/Users/Administrator/Desktop/ocl/huawei-Kafka.yml",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"services",
+								"register",
+								"file"
+							],
+							"query": [
+								{
+									"key": "oclLocation",
+									"value": "file:C:/Users/Administrator/Desktop/ocl/huawei-Kafka.yml"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fetchUpdate",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/xpanse/services/register/file/20fa59e0-ab0d-420c-902c-eb5b62fe3483?oclLocation=file:C:/Users/Administrator/Desktop/ocl/huawei-Kafka.yml",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"services",
+								"register",
+								"file",
+								"20fa59e0-ab0d-420c-902c-eb5b62fe3483"
+							],
+							"query": [
+								{
+									"key": "oclLocation",
+									"value": "file:C:/Users/Administrator/Desktop/ocl/huawei-Kafka.yml"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unregister",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/xpanse/services/register/7dc473f2-6f30-48c2-8142-ff9244455aeb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"services",
+								"register",
+								"7dc473f2-6f30-48c2-8142-ff9244455aeb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listRegisteredServices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/xpanse/services/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"services",
+								"register"
+							],
+							"query": [
+								{
+									"key": "categoryName",
+									"value": "middleware",
+									"disabled": true
+								},
+								{
+									"key": "cspName",
+									"value": "huawei",
+									"disabled": true
+								},
+								{
+									"key": "serviceName",
+									"value": "Kafka-cluster",
+									"disabled": true
+								},
+								{
+									"key": "serviceVersion",
+									"value": "v3.3.3",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/xpanse/services/register/20fa59e0-ab0d-420c-902c-eb5b62fe3483",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"xpanse",
+								"services",
+								"register",
+								"20fa59e0-ab0d-420c-902c-eb5b62fe3483"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ZitadelAuthorizationApi",
+			"item": [
+				{
+					"name": "authorize",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "getAccessToken",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
