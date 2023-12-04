@@ -1,0 +1,106 @@
+#
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: Huawei Inc.
+#
+version: '3'
+services:
+  xpanse:
+    container_name: xpanse
+    image: ghcr.io/eclipse-xpanse/xpanse:1.0.5
+    restart: always
+    ports:
+      - "8080:8080"
+      - "13133:13133"
+    environment:
+      - TERRAFORM_WEBHOOK_ENDPOINT=http://xpanse:8080
+      - TERRAFORM_BOOT_ENDPOINT=http://terraform-boot:9090
+      - AUTHORIZATION_TOKEN_TYPE=JWT
+      - OS_AUTH_URL=http://119.8.215.244/identity/v3
+      - SPRING_DATASOURCE_URL=jdbc:otel:mysql://db:3306/xpanse
+      - SPRING_PROFILES_ACTIVE=zitadel,zitadel-testbed,terraform-boot,mysql,opentelemetry
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=io.opentelemetry.instrumentation.jdbc.OpenTelemetryDriver
+      - POLICY_MAN_ENDPOINT=http://policy-man:8090
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - SPRING_DATASOURCE_USERNAME=xpanse
+    env_file:
+      - .xpanse.env
+    depends_on:
+      check-db-started:
+        condition: service_completed_successfully
+
+  ui:
+    container_name: ui
+    image: ghcr.io/eclipse-xpanse/xpanse-ui:1.0.5
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_ZITADEL_AUTHORITY_URL=https://iam.xpanse.site
+      - REACT_APP_ZITADEL_CLIENT_ID=221692308037369859@eclipse-xpanse
+      - REACT_APP_XPANSE_API_URL=https://demo.xpanse.site
+
+  db:
+    container_name: db
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=xpanse
+      - MYSQL_USER=xpanse
+    env_file:
+      - .mysql.db.env
+
+  terraform-boot:
+    container_name: terraform-boot
+    image: ghcr.io/eclipse-xpanse/terraform-boot:1.0.4
+    environment:
+      - LOG_TERRAFORM_STDOUT_STDERR=true
+
+  policy-man:
+    container_name: policy-man
+    image: ghcr.io/eclipse-xpanse/policy-man:v1.0.0
+    command: --host=0.0.0.0
+
+  check-db-started:
+    image: jwilder/dockerize:0.6.1
+    depends_on:
+      - db
+    command: 'dockerize -wait=tcp://db:3306 -timeout 30s'
+
+  otel-collector:
+    container_name: otel-collector
+    image: otel/opentelemetry-collector-contrib
+    restart: always
+    command:
+      - --config=/etc/otelcol-cont/otel-collector.yml
+    volumes:
+      - ./collector/otel-collector-grafana-stack.yml:/etc/otelcol-cont/otel-collector.yml
+
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus
+    restart: always
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    ports:
+      - "4000:3000"
+    environment:
+      - GF_SERVER_ROOT_URL=%(protocol)s://%(domain)s:%(http_port)s/grafana
+      - GF_SERVER_SERVER_FROM_SUB_PATH=true
+
+  tempo:
+    container_name: tempo
+    image: grafana/tempo:latest
+    command: [ "-config.file=/etc/tempo.yml" ]
+    volumes:
+      - ./tempo/tempo.yml:/etc/tempo.yml
+    ports:
+      - "4317"  # otlp grpc
+
+  loki:
+    container_name: loki
+    image: grafana/loki:latest
+    command: -config.file=/etc/loki/local-config.yaml
