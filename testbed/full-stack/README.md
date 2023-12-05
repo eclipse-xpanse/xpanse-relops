@@ -25,9 +25,10 @@ is used also for installing our test bed. This full stack consist of the followi
 docker-compose up -d
 ```
 
-> > Note: This stack is configured to run using Zitadel Oauth. Current configuration in the docker-compose is using our
-> > Zitadel testbed instance. If you intend to use any other Zitadel or oauth instance, then the respetive configurations in
-> > docker-compose file must be updated.
+> [!NOTE]
+> This stack is configured to run using Zitadel Oauth. Current configuration in the docker-compose is using our
+> Zitadel testbed instance. If you intend to use any other Zitadel or oauth instance, then the respetive configurations
+> in docker-compose file must be updated.
 
 ## Load balancer Config
 
