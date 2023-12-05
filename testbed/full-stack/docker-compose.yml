@@ -52,6 +52,7 @@ services:
     image: ghcr.io/eclipse-xpanse/terraform-boot:1.0.4
     environment:
       - LOG_TERRAFORM_STDOUT_STDERR=true
+      - TERRAFORM_ROOT_MODULE_DIRECTORY=/tmp/terraform-boot
 
   policy-man:
     container_name: policy-man
