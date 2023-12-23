@@ -15,7 +15,6 @@ services:
       - TERRAFORM_WEBHOOK_ENDPOINT=http://xpanse:8080
       - TERRAFORM_BOOT_ENDPOINT=http://terraform-boot:9090
       - AUTHORIZATION_TOKEN_TYPE=JWT
-      - OS_AUTH_URL=http://119.8.215.244/identity/v3
       - SPRING_DATASOURCE_URL=jdbc:otel:mysql://db:3306/xpanse
       - SPRING_PROFILES_ACTIVE=zitadel,zitadel-testbed,terraform-boot,mysql,opentelemetry
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=io.opentelemetry.instrumentation.jdbc.OpenTelemetryDriver
@@ -49,10 +48,12 @@ services:
 
   terraform-boot:
     container_name: terraform-boot
-    image: ghcr.io/eclipse-xpanse/terraform-boot:1.0.4
+    image: ghcr.io/eclipse-xpanse/terraform-boot:1.0.5
     environment:
       - LOG_TERRAFORM_STDOUT_STDERR=true
       - TERRAFORM_ROOT_MODULE_DIRECTORY=/tmp/terraform-boot
+      - SPRING_PROFILES_ACTIVE=opentelemetry
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
 
   policy-man:
     container_name: policy-man
@@ -105,3 +106,20 @@ services:
     container_name: loki
     image: grafana/loki:latest
     command: -config.file=/etc/loki/local-config.yaml
+
+  go-auto:
+    depends_on:
+      - policy-man
+    image: ghcr.io/open-telemetry/opentelemetry-go-instrumentation/autoinstrumentation-go:v0.9.0-alpha
+    privileged: true
+    pid: "host"
+    environment:
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - OTEL_GO_AUTO_TARGET_EXE=/usr/bin/policy-man
+      - OTEL_GO_AUTO_INCLUDE_DB_STATEMENT=true
+      - OTEL_SERVICE_NAME=policy-man
+      - OTEL_PROPAGATORS=tracecontext,baggage
+      - CGO_ENABLED=1
+    volumes:
+      - /proc:/host/proc
+    container_name: policy-man-auto-instrumentation
