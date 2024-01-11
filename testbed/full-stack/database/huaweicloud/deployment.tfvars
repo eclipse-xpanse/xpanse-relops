@@ -1,0 +1,12 @@
+secgroup_name           = "" # update correct value
+vpc_name                = "vpc-default" # update correct value if necessary
+subnet_name             = "subnet-default" # update correct value if necessary
+db_name                 = "xpanse"
+db_version              = "8.0"
+application_db_user     = "xpanse"
+application_db_password = "" # update correct value
+root_password           = "" # update correct value
+availability_zone       = ["eu-west-101a"] # update correct value if necessary
+enterprise_project_name = "" # update correct value
+disk_type               = "CLOUDSSD"
+disk_size               = 40
