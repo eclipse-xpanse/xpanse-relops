@@ -36,6 +36,7 @@ services:
       - REACT_APP_ZITADEL_AUTHORITY_URL=https://iam.xpanse.site
       - REACT_APP_ZITADEL_CLIENT_ID=221692308037369859@eclipse-xpanse
       - REACT_APP_XPANSE_API_URL=https://demo.xpanse.site
+      - REACT_APP_AUTH_USE_SERVICE_WORKER_ONLY=true
 
   db:
     container_name: db
