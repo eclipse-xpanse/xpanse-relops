@@ -6,7 +6,7 @@ version: '3'
 services:
   xpanse:
     container_name: xpanse
-    image: ghcr.io/eclipse-xpanse/xpanse:1.0.5
+    image: ghcr.io/eclipse-xpanse/xpanse:1.0.14
     restart: always
     ports:
       - "8080:8080"
@@ -29,7 +29,7 @@ services:
 
   ui:
     container_name: ui
-    image: ghcr.io/eclipse-xpanse/xpanse-ui:1.0.5
+    image: ghcr.io/eclipse-xpanse/xpanse-ui:1.0.8
     ports:
       - "3000:3000"
     environment:
@@ -49,7 +49,7 @@ services:
 
   terraform-boot:
     container_name: terraform-boot
-    image: ghcr.io/eclipse-xpanse/terraform-boot:1.0.5
+    image: ghcr.io/eclipse-xpanse/terraform-boot:1.0.8
     environment:
       - LOG_TERRAFORM_STDOUT_STDERR=true
       - TERRAFORM_ROOT_MODULE_DIRECTORY=/tmp/terraform-boot
@@ -58,7 +58,7 @@ services:
 
   policy-man:
     container_name: policy-man
-    image: ghcr.io/eclipse-xpanse/policy-man:v1.0.0
+    image: ghcr.io/eclipse-xpanse/policy-man:v1.0.1
     command: --host=0.0.0.0
 
   check-db-started:
@@ -124,3 +124,12 @@ services:
     volumes:
       - /proc:/host/proc
     container_name: policy-man-auto-instrumentation
+
+  tofu-maker:
+    container_name: tofu-maker
+    image: ghcr.io/eclipse-xpanse/tofu-maker:1.0.3
+    environment:
+      - LOG_TERRAFORM_STDOUT_STDERR=true
+      - OPENTOFU_ROOT_MODULE_DIRECTORY=/tmp/tofu-maker
+      - SPRING_PROFILES_ACTIVE=opentelemetry
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
