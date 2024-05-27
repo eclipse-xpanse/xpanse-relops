@@ -16,7 +16,7 @@ services:
       - TERRAFORM_BOOT_ENDPOINT=http://terraform-boot:9090
       - AUTHORIZATION_TOKEN_TYPE=JWT
       - SPRING_DATASOURCE_URL=jdbc:otel:mysql://db:3306/xpanse
-      - SPRING_PROFILES_ACTIVE=zitadel,zitadel-testbed,terraform-boot,mysql,opentelemetry
+      - SPRING_PROFILES_ACTIVE=oauth,zitadel,zitadel-testbed,terraform-boot,mysql,opentelemetry
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=io.opentelemetry.instrumentation.jdbc.OpenTelemetryDriver
       - POLICY_MAN_ENDPOINT=http://policy-man:8090
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
