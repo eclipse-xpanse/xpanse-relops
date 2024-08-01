@@ -24,7 +24,7 @@ variable "availability_zone" {
 
 variable "port" {
   type        = number
-  description = "availability zone on which the DB instance must be hosted"
+  description = "The port of the DB service."
   default     = 3306
 }
 
@@ -66,8 +66,8 @@ variable "application_db_password" {
 
 variable "enterprise_project_name" {
   type        = string
+  default     = "default"
   description = "Enterprise project on which the DB must be created and billed"
-  default     = "null"
 }
 
 variable "disk_type" {

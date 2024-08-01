@@ -10,9 +10,12 @@ data "huaweicloud_networking_secgroups" "existing" {
   name = var.secgroup_name
 }
 
-data "huaweicloud_enterprise_project" "project" {
-  count = var.enterprise_project_name != null ? 1 : 0
+data "huaweicloud_enterprise_projects" "project" {
   name  = var.enterprise_project_name
+}
+
+locals {
+  project_id = var.enterprise_project_name != null ? data.huaweicloud_enterprise_projects.project.enterprise_projects[0].id : "0"
 }
 
 resource "huaweicloud_rds_instance" "instance" {
@@ -22,7 +25,7 @@ resource "huaweicloud_rds_instance" "instance" {
   subnet_id             = data.huaweicloud_vpc_subnets.existing.subnets[0].id
   security_group_id     = data.huaweicloud_networking_secgroups.existing.security_groups[0].id
   availability_zone     = var.availability_zone
-  enterprise_project_id = var.enterprise_project_name != null ? data.huaweicloud_enterprise_project.project[0].id : null
+  enterprise_project_id = local.project_id
 
   db {
     type     = var.db_type
