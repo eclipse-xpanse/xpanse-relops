@@ -1,7 +1,7 @@
-# RDS Service on HuaweiCloud
+# DCS Service on HuaweiCloud
 
-For running the xpanse stack, we can use the RDS service on the HuaweiCloud instead of self-hosting the DB. This can be
-used for demo as well as for production.
+For running the xpanse stack, we can use the DCS service on the HuaweiCloud instead of 
+self-hosting the Redis. This can be used for demo as well as for production.
 
 ## Run Scripts
 
@@ -12,12 +12,12 @@ used for demo as well as for production.
 ```shell
 export HW_ACCESS_KEY="xxxxxxxx"
 export HW_SECRET_KEY="xxxxxxxxx"
+export HW_REGION_NAME="xxxxxxxxx"
 export HW_PROJECT_NAME="xxxxxxxxx" # optional. 
 ```
 
 2. Update variable values using the `deployment.tfvars` file and then execute the scripts or directly execute the script
-   and enter the variables on command
-   prompt.
+   and enter the variables on command prompt.
 
 ```shell
 terraform init
@@ -33,7 +33,4 @@ terraform apply #this will ask the user to enter variables.
 
 ## Resources Created
 
-1. Instance
-2. Database on the instance
-3. Application account on the database
-4. Security rule to allow connections to the database
+1. Redis Instance
