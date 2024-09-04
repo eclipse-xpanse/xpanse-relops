@@ -35,3 +35,13 @@ docker-compose up -d
 Currently, the nginx runs as a standalone process on the node and not as a docker container.
 The configuration in the [nginx](nginx) folder can be used to configure nginx to handle requests to UI, swagger UIs and
 grafana UI
+
+## Renew certificates
+
+Certificates for the demo environment is generated from `letsencrypt`. 
+Execute the below steps to renew the same. 
+
+```shell
+sudo certbot renew
+sudo nginx -s reload
+```
