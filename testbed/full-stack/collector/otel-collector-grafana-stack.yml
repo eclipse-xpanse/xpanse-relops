@@ -7,6 +7,7 @@ receivers:
   otlp:
     protocols:
       http:
+        endpoint: "0.0.0.0:4318"
       grpc:
 
 processors:
@@ -14,8 +15,8 @@ processors:
   batch:
 
 exporters:
-  logging:
-    loglevel: debug
+  debug:
+    verbosity: detailed
   prometheus:
     endpoint: "0.0.0.0:8889"
   otlp:
