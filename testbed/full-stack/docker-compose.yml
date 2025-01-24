@@ -12,6 +12,7 @@ services:
       - "8080:8080"
     environment:
       - TERRAFORM_WEBHOOK_ENDPOINT=http://xpanse:8080
+      - TOFU_MAKER_WEBHOOK_ENDPOINT=http://xpanse:8080
       - TERRAFORM_BOOT_ENDPOINT=http://terraform-boot:9090
       - TOFU_MAKER_ENDPOINT=http://tofu-maker:9092
       - AUTHORIZATION_TOKEN_TYPE=JWT
