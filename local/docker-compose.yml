@@ -10,7 +10,7 @@ services:
     environment:
       - MYSQL_DATABASE=xpanse
       - MYSQL_USER=xpanse
-      - MYSQL_PASSWORD=xpanse
+      - MYSQL_PASSWORD=Xpanse@2023
       - MYSQL_ROOT_PASSWORD=xpanse
     ports:
       - "3306:3306"
@@ -25,6 +25,8 @@ services:
       - '9090:9090'
     networks:
       - 'xpanse-local'
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   policy-man:
     container_name: policy-man
@@ -44,6 +46,8 @@ services:
       - '9092:9092'
     networks:
       - 'xpanse-local'
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   zitadel:
     restart: 'always'
