@@ -27,6 +27,8 @@ services:
       - 'xpanse-local'
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    environment:
+      - SPRING_PROFILES_ACTIVE=oauth,dev
 
   policy-man:
     container_name: policy-man
@@ -48,6 +50,8 @@ services:
       - 'xpanse-local'
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    environment:
+      - SPRING_PROFILES_ACTIVE=oauth,dev
 
   zitadel:
     restart: 'always'
