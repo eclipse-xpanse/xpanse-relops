@@ -6,7 +6,7 @@ is used also for installing our test bed. This full stack consist of the followi
 - xpanse-runtime
 - mysql
 - xpanse-ui
-- terraform-boot
+- terra-boot
 - policy-man
 - opentelemetry-collector
 - grafana

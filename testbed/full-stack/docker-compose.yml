@@ -11,13 +11,13 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - TERRAFORM_WEBHOOK_ENDPOINT=http://xpanse:8080
+      - TERRA_BOOT_WEBHOOK_ENDPOINT=http://xpanse:8080
       - TOFU_MAKER_WEBHOOK_ENDPOINT=http://xpanse:8080
-      - TERRAFORM_BOOT_ENDPOINT=http://terraform-boot:9090
+      - TERRA_BOOT_ENDPOINT=http://terra-boot:9090
       - TOFU_MAKER_ENDPOINT=http://tofu-maker:9092
       - AUTHORIZATION_TOKEN_TYPE=JWT
       - SPRING_DATASOURCE_URL=jdbc:otel:mysql://db:3306/xpanse
-      - SPRING_PROFILES_ACTIVE=oauth,zitadel,zitadel-testbed,terraform-boot,mysql,opentelemetry,tofu-maker
+      - SPRING_PROFILES_ACTIVE=oauth,zitadel,zitadel-testbed,terra-boot,mysql,opentelemetry,tofu-maker
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=io.opentelemetry.instrumentation.jdbc.OpenTelemetryDriver
       - POLICY_MAN_ENDPOINT=http://policy-man:8090
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
@@ -51,12 +51,12 @@ services:
     env_file:
       - .mysql.db.env
 
-  terraform-boot:
-    container_name: terraform-boot
-    image: ghcr.io/eclipse-xpanse/terraform-boot:1.0.8
+  terra-boot:
+    container_name: terra-boot
+    image: ghcr.io/eclipse-xpanse/terra-boot:1.0.8
     environment:
       - LOG_TERRAFORM_STDOUT_STDERR=true
-      - TERRAFORM_ROOT_MODULE_DIRECTORY=/tmp/terraform-boot
+      - TERRAFORM_ROOT_MODULE_DIRECTORY=/tmp/terra-boot
       - SPRING_PROFILES_ACTIVE=opentelemetry
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
 
