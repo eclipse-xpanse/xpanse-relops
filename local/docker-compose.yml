@@ -17,9 +17,9 @@ services:
     networks:
       - 'xpanse-local'
 
-  terraform-boot:
-    container_name: terraform-boot
-    image: ghcr.io/eclipse-xpanse/terraform-boot:latest
+  terra-boot:
+    container_name: terra-boot
+    image: ghcr.io/eclipse-xpanse/terra-boot:latest
     pull_policy: always
     ports:
       - '9090:9090'
