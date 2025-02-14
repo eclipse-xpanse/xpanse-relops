@@ -28,7 +28,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
-      - SPRING_PROFILES_ACTIVE=oauth,dev
+      - SPRING_PROFILES_ACTIVE=dev
 
   policy-man:
     container_name: policy-man
@@ -51,11 +51,12 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
-      - SPRING_PROFILES_ACTIVE=oauth,dev
+      - SPRING_PROFILES_ACTIVE=dev
 
   zitadel:
     restart: 'always'
     container_name: 'zitadel'
+    pull_policy: always
     networks:
       - 'xpanse-local'
     image: ghcr.io/eclipse-xpanse/xpanse-zitadel-dev-server:latest # image built locally by commiting an already initialized zitadel server
@@ -69,6 +70,7 @@ services:
   db:
     container_name: 'zitadel-db'
     restart: 'always'
+    pull_policy: always
     image: ghcr.io/eclipse-xpanse/xpanse-zitadel-dev-db:latest # image built locally by commiting an already initialized zitadel Postgres DB
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready", "-d", "zitadel", "-U", "postgres" ]
