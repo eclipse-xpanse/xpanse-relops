@@ -38,8 +38,9 @@ services:
       - "3000:3000"
     environment:
       - VITE_APP_ZITADEL_AUTHORITY_URL=https://iam.xpanse.site
-      - VITE_APP_ZITADEL_CLIENT_ID=221692308037369859@eclipse-xpanse
+      - VITE_APP_ZITADEL_CLIENT_ID=293850493212491779@eclipse-xpanse
       - VITE_APP_XPANSE_API_URL=https://demo.xpanse.site
+      - VITE_APP_AUTH_DISABLED=false
       - VITE_APP_AUTH_USE_SERVICE_WORKER_ONLY=true
 
   db:
