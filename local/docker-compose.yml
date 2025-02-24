@@ -17,6 +17,16 @@ services:
     networks:
       - 'xpanse-local'
 
+  xpanse-redis:
+    container_name: xpanse-redis
+    image: redis:latest
+    environment:
+      - REDIS_PASSWORD=Xpanse@2023
+    ports:
+      - "6379:6379"
+    networks:
+      - 'xpanse-local'
+
   terra-boot:
     container_name: terra-boot
     image: ghcr.io/eclipse-xpanse/terra-boot:latest
