@@ -5,6 +5,7 @@ is used also for installing our test bed. This full stack consist of the followi
 
 - xpanse-runtime
 - mysql
+- redis
 - xpanse-ui
 - terra-boot
 - policy-man
@@ -19,7 +20,8 @@ is used also for installing our test bed. This full stack consist of the followi
 1. Checkout this repository.
 2. Update versions of docker images if necessary.
 3. Update DB passwords in environment config files - [xpanse-runtime](.xpanse.env) and [database](.mysql.db.env).
-4. Start the stack using below command
+4. Update Redis password in environment config files - [xpanse-runtime](.xpanse.env) and [redis](.redis.env).
+5. Start the stack using below command
 
 ```shell
 docker-compose up -d
