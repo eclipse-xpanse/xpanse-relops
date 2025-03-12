@@ -16,11 +16,14 @@ services:
       - TOFU_MAKER_ENDPOINT=http://tofu-maker:9092
       - AUTHORIZATION_TOKEN_TYPE=JWT
       - SPRING_DATASOURCE_URL=jdbc:otel:mysql://db:3306/xpanse
+      - SPRING_ACTIVITI_DATASOURCE_URL=jdbc:otel:mysql://db:3306/activiti
       - SPRING_PROFILES_ACTIVE=oauth,zitadel,zitadel-testbed,terra-boot,tofu-maker,mysql,redis,opentelemetry,dev
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=io.opentelemetry.instrumentation.jdbc.OpenTelemetryDriver
+      - SPRING_ACTIVITI_DATASOURCE_DRIVER_CLASS_NAME=io.opentelemetry.instrumentation.jdbc.OpenTelemetryDriver
       - POLICY_MAN_ENDPOINT=http://policy-man:8090
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
       - SPRING_DATASOURCE_USERNAME=xpanse
+      - SPRING_ACTIVITI_DATASOURCE_USERNAME=activiti
       - SPRING_REDIS_HOST=xpanse-redis
       - PLUS_SERVER_AUTH_URL=https://api.gx-scs.sovereignit.cloud:5000/v3
       - REGIO_CLOUD_AUTH_URL=https://keystone.services.a.regiocloud.tech
@@ -61,6 +64,8 @@ services:
       - MYSQL_USER=xpanse
     env_file:
       - .mysql.db.env
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       interval: 30s
