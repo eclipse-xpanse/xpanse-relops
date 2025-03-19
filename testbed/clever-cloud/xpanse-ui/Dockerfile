@@ -1,0 +1,1 @@
+FROM ghcr.io/eclipse-xpanse/xpanse-ui:latest
