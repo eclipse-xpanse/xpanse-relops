@@ -1,22 +1,7 @@
-terraform {
-  required_providers {
-    clevercloud = {
-      source  = "CleverCloud/clevercloud"
-      version = "0.7.0"
-    }
-  }
-}
-
-provider "clevercloud" {
-  token        = "5a6a9d9b30984f3a8070acbef3caef00"
-  secret       = "rnREaIe1M.Y7sYDWjEexmzNLaAewq3Dv"
-  organisation = "user_8701f014-a86a-4587-a317-7e062eb347b9"
-}
-
 resource "clevercloud_addon" "xpanse_db" {
   name                 = "db"
   region               = "par"
-  plan                 = "dev" 
+  plan                 = "dev"
   third_party_provider = "mysql-addon"
 }
 
@@ -29,8 +14,8 @@ resource "clevercloud_docker" "xpanse" {
   biggest_flavor     = "M"
 
   deployment {
-    repository = "https://github.com/damiano000/xpanse-relops.git"
-    commit     = "refs/heads/main"
+    repository = var.docker_repository_url
+    commit     = var.docker_commit
   }
 
   dockerfile = "testbed/clever-cloud/Dockerfile"

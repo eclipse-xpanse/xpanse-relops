@@ -7,8 +7,8 @@ resource "clevercloud_docker" "policy_man" {
   biggest_flavor     = "M"
 
   deployment {
-    repository = "https://github.com/damiano000/xpanse-relops.git"
-    commit     = "refs/heads/main"
+    repository = var.docker_repository_url
+    commit     = var.docker_commit
   }
 
   dockerfile = "testbed/clever-cloud/policy-man/Dockerfile"
