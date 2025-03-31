@@ -18,4 +18,6 @@ resource "clevercloud_docker" "tofu_maker" {
     CC_DOCKERFILE               = "testbed/clever-cloud/tofu-maker/Dockerfile"
     SPRING_PROFILES_ACTIVE      = "dev,noauth"
   }
+
+  additional_vhosts = var.is_final_environment ? ["tofu-maker.${var.custom_domain_name}"] : []
 }

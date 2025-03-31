@@ -26,3 +26,13 @@ variable "docker_commit" {
   type        = string
   default     = "refs/heads/main"
 }
+
+variable "is_final_environment" {
+  type    = bool
+  default = false
+}
+
+variable "custom_domain_name" {
+  type    = string
+  default = ""
+}

@@ -18,4 +18,6 @@ resource "clevercloud_docker" "terraboot" {
     CC_DOCKERFILE               = "testbed/clever-cloud/terra-boot/Dockerfile"
     SPRING_PROFILES_ACTIVE      = "dev,noauth"
   }
+
+  additional_vhosts = var.is_final_environment ? ["terra-boot.${var.custom_domain_name}"] : []
 }
