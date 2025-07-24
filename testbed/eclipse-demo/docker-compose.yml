@@ -1,0 +1,184 @@
+#
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: Huawei Inc.
+#
+services:
+  xpanse:
+    container_name: xpanse
+    image: ghcr.io/eclipse-xpanse/xpanse:latest
+    pull_policy: always
+    restart: always
+    ports:
+      - "8082:8080"
+    networks:
+      - xpanse-demo-network
+    environment:
+      - TERRA_BOOT_WEBHOOK_ENDPOINT=http://xpanse:8080
+      - TOFU_MAKER_WEBHOOK_ENDPOINT=http://xpanse:8080
+      - TERRA_BOOT_ENDPOINT=http://terra-boot:9090
+      - TOFU_MAKER_ENDPOINT=http://tofu-maker:9092
+      - AUTHORIZATION_TOKEN_TYPE=JWT
+      - SPRING_DATASOURCE_JDBCURL=jdbc:otel:mysql://db:3306/xpanse
+      - SPRING_ACTIVITI_DATASOURCE_JDBCURL=jdbc:otel:mysql://db:3306/activiti
+      - SPRING_PROFILES_ACTIVE=oauth,dev,zitadel,zitadel-testbed,terra-boot,mysql,opentelemetry,tofu-maker
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=io.opentelemetry.instrumentation.jdbc.OpenTelemetryDriver
+      - SPRING_ACTIVITI_DATASOURCE_DRIVER_CLASS_NAME=io.opentelemetry.instrumentation.jdbc.OpenTelemetryDriver
+      - POLICY_MAN_ENDPOINT=http://policy-man:8090
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
+      - SPRING_DATASOURCE_USERNAME=xpanse
+      - SPRING_ACTIVITI_DATASOURCE_USERNAME=activiti
+      - PLUS_SERVER_AUTH_URL=https://api.gx-scs.sovereignit.cloud:5000/v3
+      - REGIO_CLOUD_AUTH_URL=https://keystone.services.a.regiocloud.tech
+      - OPENSTACK_TESTLAB_AUTH_URL=http://119.8.215.244/identity/v3
+      - AUTHORIZATION_SERVER_ENDPOINT=https://xpanse-demo.eclipseprojects.io
+      - AUTHORIZATION_API_CLIENT_ID=330255867695923203
+      - AUTHORIZATION_API_CLIENT_SECRET=jg5Hj002ezVnW153Gkq51jrhVIbegLEHw3QC37rGTnKOJOepYU2Q0eGgtCWYogsJ
+      - AUTHORIZATION_SWAGGER_UI_CLIENT_ID=330255867746254851
+      - OAUTH_PROTECTED_API_CLIENT_ID=apiclient
+      - OAUTH_PROTECTED_API_CLIENT_SECRET=xNMswXhqJUEL1yX85Qjv5UtZuebyrbRQu5lgHXH6YUAYIPlQctArbmFbhuLbm53p
+    env_file:
+      - .xpanse.env
+    depends_on:
+      check-db-started:
+        condition: service_completed_successfully
+
+  ui:
+    networks:
+      - xpanse-demo-network
+    container_name: ui
+    pull_policy: always
+    image: ghcr.io/eclipse-xpanse/xpanse-ui:latest
+    environment:
+      - VITE_APP_ZITADEL_AUTHORITY_URL=https://xpanse-demo.eclipseprojects.io
+      - VITE_APP_ZITADEL_CLIENT_ID=330255867695923203
+      - VITE_APP_XPANSE_API_URL=https://xpanse-demo.eclipseprojects.io
+      - VITE_APP_AUTH_DISABLED=false
+      - VITE_APP_AUTH_USE_SERVICE_WORKER_ONLY=true
+      - VITE_APP_BASE_URI=/app
+      - VITE_APP_ZITADEL_REDIRECT_URI=/app/authentication/callback
+      - VITE_APP_ZITADEL_SILENT_REDIRECT_URI=/app/authentication/silent-callback
+
+  db:
+    networks:
+      - xpanse-demo-network
+    container_name: db
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=xpanse
+      - MYSQL_USER=xpanse
+    env_file:
+      - .mysql.db.env
+    volumes:
+      - ./init-activiti-database.sh:/docker-entrypoint-initdb.d/init-activiti-database.sh
+
+  terra-boot:
+    networks:
+      - xpanse-demo-network
+    container_name: terra-boot
+    pull_policy: always
+    image: ghcr.io/eclipse-xpanse/terra-boot:latest
+    environment:
+      - LOG_TERRAFORM_STDOUT_STDERR=true
+      - TERRAFORM_ROOT_MODULE_DIRECTORY=/tmp/terra-boot
+      - SPRING_PROFILES_ACTIVE=dev,opentelemetry
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
+
+  policy-man:
+    networks:
+      - xpanse-demo-network
+    container_name: policy-man
+    pull_policy: always
+    image: ghcr.io/eclipse-xpanse/policy-man:latest
+    command: --host=0.0.0.0
+
+  check-db-started:
+    networks:
+      - xpanse-demo-network
+    image: jwilder/dockerize:0.6.1
+    depends_on:
+      - db
+    command: 'dockerize -wait=tcp://db:3306 -timeout 30s'
+
+  otel-collector:
+    networks:
+      - xpanse-demo-network
+    container_name: otel-collector
+    image: otel/opentelemetry-collector-contrib
+    restart: always
+    command:
+      - --config=/etc/otelcol-cont/otel-collector.yml
+    volumes:
+      - ./collector/otel-collector-grafana-stack.yml:/etc/otelcol-cont/otel-collector.yml
+
+  prometheus:
+    networks:
+      - xpanse-demo-network
+    container_name: prometheus
+    image: prom/prometheus
+    restart: always
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    networks:
+      - xpanse-demo-network
+    container_name: grafana
+    image: grafana/grafana
+    environment:
+      - GF_SERVER_ROOT_URL=%(protocol)s://%(domain)s:%(http_port)s/grafana
+      - GF_SERVER_SERVER_FROM_SUB_PATH=true
+
+  tempo:
+    networks:
+      - xpanse-demo-network
+    container_name: tempo
+    image: grafana/tempo:latest
+    command: [ "-config.file=/etc/tempo.yml" ]
+    volumes:
+      - ./tempo/tempo.yml:/etc/tempo.yml
+    ports:
+      - "4317"  # otlp grpc
+
+  loki:
+    networks:
+      - xpanse-demo-network
+    container_name: loki
+    image: grafana/loki:latest
+    command: -config.file=/etc/loki/local-config.yaml
+
+  go-auto:
+    networks:
+      - xpanse-demo-network
+    depends_on:
+      - policy-man
+    image: ghcr.io/open-telemetry/opentelemetry-go-instrumentation/autoinstrumentation-go:latest
+    privileged: true
+    pid: "host"
+    environment:
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
+      - OTEL_GO_AUTO_TARGET_EXE=/usr/bin/policy-man
+      - OTEL_GO_AUTO_INCLUDE_DB_STATEMENT=true
+      - OTEL_SERVICE_NAME=policy-man
+      - OTEL_PROPAGATORS=tracecontext,baggage
+      - CGO_ENABLED=1
+    volumes:
+      - /proc:/host/proc
+    container_name: policy-man-auto-instrumentation
+
+  tofu-maker:
+    container_name: tofu-maker
+    pull_policy: always
+    networks:
+      - xpanse-demo-network
+    image: ghcr.io/eclipse-xpanse/tofu-maker:latest
+    environment:
+      - LOG_TERRAFORM_STDOUT_STDERR=true
+      - OPENTOFU_ROOT_MODULE_DIRECTORY=/tmp/tofu-maker
+      - SPRING_PROFILES_ACTIVE=dev,opentelemetry
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
+networks:
+  xpanse-demo-network:
+    name: xpanse-demo-network
+    external: true
