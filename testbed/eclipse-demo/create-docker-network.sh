@@ -1,0 +1,1 @@
+sudo docker network create -d bridge xpanse-demo-network

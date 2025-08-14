@@ -1,0 +1,1 @@
+docker run --network xpanse-demo-network --name nginx -v /etc/nginx/ssl/:/etc/nginx/ssl/ -v conf.d:/etc/nginx/conf.d -d nginx:latest
