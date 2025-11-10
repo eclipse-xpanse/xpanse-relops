@@ -1,0 +1,29 @@
+---
+resources:
+  - ../../base/core
+  - ../../base/extensions
+
+patches:
+  - path: patch-demo.yaml
+
+namespace: xpanse
+
+configMapGenerator:
+  - name: xpanse-config
+    behavior: merge
+    literals:
+      - SPRING_DATASOURCE_JDBCURL="jdbc:otel:mysql://db:3306/xpanse"
+      - SPRING_ACTIVITI_DATASOURCE_JDBCURL="jdbc:otel:mysql://db:3306/activiti"
+      - SPRING_PROFILES_ACTIVE="oauth,dev,zitadel,zitadel-testbed,terra-boot,mysql,opentelemetry,tofu-maker,redis"
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME="io.opentelemetry.instrumentation.jdbc.OpenTelemetryDriver"
+      - SPRING_ACTIVITI_DATASOURCE_DRIVER_CLASS_NAME="io.opentelemetry.instrumentation.jdbc.OpenTelemetryDriver"
+      - SPRING_DATA_REDIS_HOST="redis"
+      - SPRING_DATA_REDIS_PORT="6379"
+  - name: tofu-maker-config
+    behavior: merge
+    literals:
+        - FAILED_CALLBACK_RESPONSE_STORE_LOCATION="/data/shared/tofu-maker/callback-response-store"
+  - name: terra-boot-config
+    behavior: merge
+    literals:
+      - FAILED_CALLBACK_RESPONSE_STORE_LOCATION="/data/shared/terra-boot/callback-response-store"

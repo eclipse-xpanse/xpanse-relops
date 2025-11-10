@@ -1,0 +1,63 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xpanse-config
+data:
+  TOFU_MAKER_WEBHOOK_ENDPOINT: "http://xpanse-service:80"
+  TERRA_BOOT_ENDPOINT: "http://terra-boot-service:9090"
+  TOFU_MAKER_ENDPOINT: "http://tofu-maker-service:9092"
+  TERRA_BOOT_WEBHOOK_ENDPOINT: "http://xpanse-service:80"
+  AUTHORIZATION_TOKEN_TYPE: "JWT"
+  POLICY_MAN_ENDPOINT: "http://policy-man-service:8090"
+  OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector:4318"
+  SPRING_DATASOURCE_USERNAME: "xpanse"
+  SPRING_ACTIVITI_DATASOURCE_USERNAME: "activiti"
+  PLUS_SERVER_AUTH_URL: "https://api.gx-scs.sovereignit.cloud:5000/v3"
+  REGIO_CLOUD_AUTH_URL: "https://keystone.services.a.regiocloud.tech"
+  OPENSTACK_TESTLAB_AUTH_URL: "http://119.8.215.244/identity/v3"
+  AUTHORIZATION_SERVER_ENDPOINT: "https://xpanse-demo.eclipseprojects.io"
+  AUTHORIZATION_API_CLIENT_ID: "330255867695923203"
+  AUTHORIZATION_API_CLIENT_SECRET: "jg5Hj002ezVnW153Gkq51jrhVIbegLEHw3QC37rGTnKOJOepYU2Q0eGgtCWYogsJ"
+  AUTHORIZATION_SWAGGER_UI_CLIENT_ID: "330255867746254851"
+  OAUTH_PROTECTED_API_CLIENT_ID: "apiclient"
+  OAUTH_PROTECTED_API_CLIENT_SECRET: "xNMswXhqJUEL1yX85Qjv5UtZuebyrbRQu5lgHXH6YUAYIPlQctArbmFbhuLbm53p"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xpanse
+  labels:
+    app: xpanse
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: xpanse
+  template:
+    metadata:
+      labels:
+        app: xpanse
+    spec:
+      containers:
+        - name: xpanse
+          image: ghcr.io/eclipse-xpanse/xpanse:latest
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: xpanse-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: xpanse-service
+spec:
+  type: ClusterIP
+  selector:
+    app: xpanse
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

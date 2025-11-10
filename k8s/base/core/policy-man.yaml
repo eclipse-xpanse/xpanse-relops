@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: policy-man
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: policy-man
+  template:
+    metadata:
+      labels:
+        app: policy-man
+    spec:
+      containers:
+        - name: policy-man
+          image: ghcr.io/eclipse-xpanse/policy-man:latest
+          imagePullPolicy: Always
+          args: ["--host=0.0.0.0"]
+          ports:
+            - containerPort: 8090
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: policy-man-service
+spec:
+  selector:
+    app: policy-man
+  ports:
+    - protocol: TCP
+      port: 8090
+      targetPort: 8090
+  clusterIP: None

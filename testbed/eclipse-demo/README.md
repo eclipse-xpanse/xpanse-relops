@@ -31,7 +31,9 @@ sudo docker run --network xpanse-demo-network --name nginx -p 443:443 -v /etc/le
 ## SSL Certificates
 
 Certificates for the **xpanse-demo.eclipseprojects.io** domain can be renewed or recreated using the certbot command below.
+The certificates are on the VM but the directory is mounted inside the NGINX docker container.
 
 ```ssh
-sudo certbot certonly --standalone
+sudo certbot certonly --standalone --certname xpanse-demo.eclipseprojects.io
+sudo docker restart nginx
 ```
