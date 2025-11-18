@@ -74,22 +74,6 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
         - name: terra-boot
-          env:
-            - name: SPRING_DATA_REDIS_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: redis-secret
-                  key: REDIS_PASSWORD
-            - name: SPRING_ACTIVITI_DATASOURCE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: MYSQL_PASSWORD
-            - name: SPRING_DATASOURCE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: MYSQL_ACTIVITI_PASSWORD
           volumeMounts:
             - mountPath: /data/shared/terra-boot/callback-response-store
               name: shared-storage

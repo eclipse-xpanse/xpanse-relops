@@ -8,7 +8,9 @@ data:
   TERRAFORM_ROOT_MODULE_DIRECTORY: "/tmp/tofu-maker"
   SPRING_PROFILES_ACTIVE: "dev,opentelemetry"
   OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector:4318"
-
+  MANAGEMENT_ENDPOINT_HEALTH_PROBES_ENABLED: "true"
+  MANAGEMENT_HEALTH_LIVENESSSTATE_ENABLED: "true"
+  MANAGEMENT_HEALTH_READINESSSTATE_ENABLED: "true"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -33,6 +35,14 @@ spec:
                 name: tofu-maker-config
           ports:
             - containerPort: 9092
+          readinessProbe:
+            httpGet:
+              port: 9092
+              path: /actuator/health/readiness
+          livenessProbe:
+            httpGet:
+              port: 9092
+              path: /actuator/health/liveness
 ---
 apiVersion: v1
 kind: Service

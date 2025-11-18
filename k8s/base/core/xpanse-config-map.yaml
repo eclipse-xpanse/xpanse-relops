@@ -1,0 +1,24 @@
+# This is stored as a separate file so that the config map can be applied individually.
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xpanse-config
+data:
+  # ensure the file name is same as the application name in spring config.
+  xpanse-runtime.yaml: |
+    spring:
+      datasource:
+        username: "xpanse"
+      activiti:
+        username: "activiti"
+    xpanse:
+      deployer:
+        tofu-maker:
+          webhook-endpoint: "http://xpanse-service:80"
+          endpoint: "http://tofu-maker-service:9092"
+        terra-boot:
+          webhook-endpoint: "http://xpanse-service:80"
+          endpoint: "http://terra-boot-service:9090"
+      policy-man:
+        endpoint: "http://policy-man-service:8090"
