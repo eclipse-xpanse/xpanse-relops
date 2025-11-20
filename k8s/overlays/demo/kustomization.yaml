@@ -14,16 +14,28 @@ configMapGenerator:
     literals:
       - SPRING_DATASOURCE_JDBCURL="jdbc:otel:mysql://db:3306/xpanse"
       - SPRING_ACTIVITI_DATASOURCE_JDBCURL="jdbc:otel:mysql://db:3306/activiti"
-      - SPRING_PROFILES_ACTIVE="oauth,dev,zitadel,zitadel-testbed,terra-boot,mysql,opentelemetry,tofu-maker,redis"
+      - SPRING_PROFILES_ACTIVE="k8s,oauth,dev,zitadel,zitadel-testbed,terra-boot,mysql,opentelemetry,tofu-maker,redis"
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME="io.opentelemetry.instrumentation.jdbc.OpenTelemetryDriver"
       - SPRING_ACTIVITI_DATASOURCE_DRIVER_CLASS_NAME="io.opentelemetry.instrumentation.jdbc.OpenTelemetryDriver"
-      - SPRING_DATA_REDIS_HOST="redis"
+      - SPRING_DATA_REDIS_HOST="redis-service"
       - SPRING_DATA_REDIS_PORT="6379"
+      - OTEL_EXPORTER_OTLP_ENDPOINT="http://otel-collector-service:4318"
+      - AUTHORIZATION_SERVER_ENDPOINT="https://xpanse-demo.eclipseprojects.io"
+      - AUTHORIZATION_API_CLIENT_ID="330255867695923203"
+      - AUTHORIZATION_API_CLIENT_SECRET="jg5Hj002ezVnW153Gkq51jrhVIbegLEHw3QC37rGTnKOJOepYU2Q0eGgtCWYogsJ"
+      - AUTHORIZATION_SWAGGER_UI_CLIENT_ID="330255867746254851"
+      - OAUTH_PROTECTED_API_CLIENT_ID="apiclient"
+      - OAUTH_PROTECTED_API_CLIENT_SECRET="xNMswXhqJUEL1yX85Qjv5UtZuebyrbRQu5lgHXH6YUAYIPlQctArbmFbhuLbm53p"
+
   - name: tofu-maker-config
     behavior: merge
     literals:
         - FAILED_CALLBACK_RESPONSE_STORE_LOCATION="/data/shared/tofu-maker/callback-response-store"
+        - SPRING_PROFILES_ACTIVE="dev,opentelemetry"
+        - OTEL_EXPORTER_OTLP_ENDPOINT="http://otel-collector-service:4318"
   - name: terra-boot-config
     behavior: merge
     literals:
       - FAILED_CALLBACK_RESPONSE_STORE_LOCATION="/data/shared/terra-boot/callback-response-store"
+      - SPRING_PROFILES_ACTIVE="dev,opentelemetry"
+      - OTEL_EXPORTER_OTLP_ENDPOINT="http://otel-collector-service:4318"

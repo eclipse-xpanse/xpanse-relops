@@ -6,10 +6,18 @@ resources:
  - ../../base/core/
  - loadbalancer.yaml
 
+patches:
+  - path: patch-dev.yaml
+
 namespace: xpanse
 
 configMapGenerator:
- - name: xpanse-config
+ - name: tofu-maker-config
    behavior: merge
    literals:
-    - SPRING_PROFILES_ACTIVE=oauth,dev,zitadel,zitadel-testbed,terra-boot,tofu-maker
+     - SPRING_PROFILES_ACTIVE="dev"
+ - name: terra-boot-config
+   behavior: merge
+   literals:
+     - SPRING_PROFILES_ACTIVE="dev"
+     - OTEL_EXPORTER_OTLP_ENDPOINT="http://otel-collector-service:4318"

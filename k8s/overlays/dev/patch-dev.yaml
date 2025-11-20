@@ -1,0 +1,15 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xpanse
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: xpanse
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: kubernetes,oauth,zitadel,zitadel-testbed,dev,terra-boot,tofu-maker
+              

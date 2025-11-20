@@ -3,6 +3,8 @@ kind: Kustomization
 
 resources:
   - namespace.yaml
+  - xpanse-service-account.yaml
+  - xpanse-config-map.yaml
   - xpanse.yaml
   - ui.yaml
   - policy-man.yaml

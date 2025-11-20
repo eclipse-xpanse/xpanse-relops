@@ -19,6 +19,14 @@ spec:
           args: ["--host=0.0.0.0"]
           ports:
             - containerPort: 8090
+          readinessProbe:
+            httpGet:
+              port: 8090
+              path: /health
+          livenessProbe:
+            httpGet:
+              port: 8090
+              path: /health
 
 ---
 apiVersion: v1
