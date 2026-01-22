@@ -1,2 +1,65 @@
-Release operations related material and artifacts such as SBOMs, release notes,
-test plans and reports, and other documentation.
+ 
+ 
+For tf-script: How to Deploy
+
+To deploy the Xpanse stack on Clever Cloud using Terraform, follow these steps:
+
+Open a terminal with Bash support.
+Navigate to the root folder of the project, for example:
+
+cd path/to/project
+
+Run the deployment script:
+
+./deploy.sh
+
+When prompted, enter the required credentials for Clever Cloud.
+
+🔐 How to Get Clever Cloud Credentials
+To deploy these services via Terraform, you need the following variables:
+
+clevercloud_token
+clevercloud_secret
+clevercloud_organisation
+
+🛠️ Steps to obtain them:
+✅ Get clevercloud_token and clevercloud_secret
+Open a terminal and run:
+
+clever login
+
+Authenticate with your Clever Cloud credentials.
+After login, the CLI will generate your clevercloud_token and clevercloud_secret automatically.
+You can now use them in the deployment script.
+
+🧭 Get clevercloud_organisation ID
+Go to Clever Cloud Console
+
+At the top left of the dashboard, click on "Personal space"
+
+Once inside, at the top right you will find a field like:
+
+user_12345678-abcd-4321-aaaa-123456789abc
+
+That is your organisation ID. Copy it and use it as clevercloud_organisation.
+
+❌ How to Destroy the Deployment
+If you want to destroy all deployed resources, run:
+
+terraform destroy \
+  -var="clevercloud_token=YOUR_TOKEN" \
+  -var="clevercloud_secret=YOUR_SECRET" \
+  -var="clevercloud_organisation=YOUR_ORGANISATION_ID" \
+  -auto-approve
+
+Replace YOUR_TOKEN, YOUR_SECRET and YOUR_ORGANISATION_ID with your actual values.
+
+⚠️ Troubleshooting
+If you get an error like this:
+
+│ Error: invalid CleverCloud Client configuration
+│ invalid response from CleverCloud API (status=401):
+│ {"id":2001,"message":"Not connected","type":"error"}
+➡️ It means your token has expired.
+
+Run clever login again to generate a new token and secret.
