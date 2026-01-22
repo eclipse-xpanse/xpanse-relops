@@ -37,6 +37,7 @@ services:
       - OAUTH_PROTECTED_API_CLIENT_ID=apiclient
       - OAUTH_PROTECTED_API_CLIENT_SECRET=xNMswXhqJUEL1yX85Qjv5UtZuebyrbRQu5lgHXH6YUAYIPlQctArbmFbhuLbm53p
       - HUAWEICLOUD_SDK_REGION_ECS_EU_WEST_101=https://ecs.eu-west-101.myhuaweicloud.eu
+      - HUAWEICLOUD_SDK_REGION_CES_EU_WEST_101=https://ces.eu-west-101.myhuaweicloud.eu
     env_file:
       - .xpanse.env
     depends_on:

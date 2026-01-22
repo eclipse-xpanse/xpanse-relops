@@ -29,6 +29,7 @@ services:
       - REGIO_CLOUD_AUTH_URL=https://keystone.services.a.regiocloud.tech
       - OPENSTACK_TESTLAB_AUTH_URL=http://119.8.215.244/identity/v3
       - HUAWEICLOUD_SDK_REGION_ECS_EU_WEST_101=https://ecs.eu-west-101.myhuaweicloud.eu
+      - HUAWEICLOUD_SDK_REGION_CES_EU_WEST_101=https://ces.eu-west-101.myhuaweicloud.eu
     env_file:
       - .xpanse.env
     depends_on:
