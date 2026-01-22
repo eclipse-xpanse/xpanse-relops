@@ -131,6 +131,7 @@ services:
     environment:
       - GF_SERVER_ROOT_URL=%(protocol)s://%(domain)s:%(http_port)s/grafana
       - GF_SERVER_SERVER_FROM_SUB_PATH=true
+      - GF_SERVER_HTTP_PORT=4000
 
   tempo:
     networks:
