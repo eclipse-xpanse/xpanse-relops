@@ -37,6 +37,7 @@ services:
       - OAUTH_PROTECTED_API_CLIENT_ID=apiclient
       - OAUTH_PROTECTED_API_CLIENT_SECRET=xNMswXhqJUEL1yX85Qjv5UtZuebyrbRQu5lgHXH6YUAYIPlQctArbmFbhuLbm53p
       - HUAWEICLOUD_SDK_REGION_ECS_EU_WEST_101=https://ecs.eu-west-101.myhuaweicloud.eu
+      - HUAWEICLOUD_SDK_REGION_CES_EU_WEST_101=https://ces.eu-west-101.myhuaweicloud.eu
     env_file:
       - .xpanse.env
     depends_on:
@@ -130,6 +131,7 @@ services:
     environment:
       - GF_SERVER_ROOT_URL=%(protocol)s://%(domain)s:%(http_port)s/grafana
       - GF_SERVER_SERVER_FROM_SUB_PATH=true
+      - GF_SERVER_HTTP_PORT=4000
 
   tempo:
     networks:
